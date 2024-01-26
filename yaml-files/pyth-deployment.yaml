@@ -52,6 +52,8 @@ spec:
         volumeMounts:
             - name: loginapp-persistent-storage
               mountPath: /var/www/html
+            - name: loginapp-instance-credentials
+              mountPath: /secrets/cloudsql
         resources:
           limits:
             memory: "128Mi"
@@ -63,3 +65,6 @@ spec:
        - name: loginapp-persistent-storage
          persistentVolumeClaim:
            claimName: loginapp-1
+       - name: loginapp-instance-credentials
+         secret:
+           secretName: loginapp-instance-credentials 
