@@ -34,7 +34,7 @@ spec:
             secretKeyRef:
               name: loginapp-credentials-instance
               key: host
-        - name: MYSQL_PASSWORD
+        - name: MYSQL_PASSWORD 
           valueFrom:
             secretKeyRef:
               name: loginapp-credentials-instance
