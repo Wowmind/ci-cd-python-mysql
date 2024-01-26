@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loginapp
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app: loginapp
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
