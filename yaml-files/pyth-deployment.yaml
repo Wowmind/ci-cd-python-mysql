@@ -35,6 +35,9 @@ spec:
             secretKeyRef:
               name: loginapp-credentials-instance
               key: user
+        volumeMounts:
+            - name: loginapp-persistent-storage
+              mountPath: /var/www/html
         resources:
           limits:
             memory: "128Mi"
@@ -42,3 +45,7 @@ spec:
         ports:
         - containerPort: 5000
           name: loginapp
+      volumes:
+       - name: loginapp-persistent-storage
+         persistentVolumeClaim:
+           claimName: loginapp-1
