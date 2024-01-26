@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "loginapp"
+    spec.ingressClassName: "gce"
+  name: loginapp
+spec:
+  defaultBackend:
+    service:
+      name: loginapp
+      port:
+        number: 80
+  rules:
+  - http:
+      paths:
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: loginapp
+            port:
+              number: 5000
