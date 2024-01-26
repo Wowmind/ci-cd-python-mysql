@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loginapp
+spec:
+  selector:
+    matchLabels:
+      app: loginapp
+  template:
+    metadata:
+      labels:
+        app: loginapp
+    spec:
+      containers:
+      - name: loginapp
+        image: gcr.io/ringed-rune-412119/cicdproj
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            secretKeyRef:
+              name: loginapp-credentials-instance
+              key: host
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: loginapp-credentials-instance
+              key: password
+        - name: MYSQL_DB
+          valueFrom:
+            secretKeyRef:
+              name: loginapp-credentials-instance
+              key: database
+        - name: MYSQL_NAME
+          valueFrom:
+            secretKeyRef:
+              name: loginapp-credentials-instance
+              key: user
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+          name: loginapp
